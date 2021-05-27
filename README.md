@@ -12,3 +12,10 @@ Back-End: PHP, MariaDB
 IDE: Notepad++
 
 Server: Apache2
+
+Funcionalidades:
+
+-Cadastro de material
+-Cadastro de depósito
+-Entrada de material
+-Saida de material
