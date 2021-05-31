@@ -107,7 +107,7 @@ echo "</div class='container'>";
     </div>
 	<form>
 		<div class="input-field">
-		  <input metodo="pesquisa_material" id="search1" type="search" class="pesquisa">
+		  <input metodo="pesquisa_material_saida" id="search1" type="search" class="pesquisa">
 		  <label class="label-icon" for="search1"></label>
 		  <i class="material-icons">close</i>
 		</div>
