@@ -349,6 +349,52 @@ if($_POST['metodo'] == "pesquisa_material"){
 	
 }
 
+if($_POST['metodo'] == "pesquisa_material_saida"){
+	$palavra = $_POST['palavra'];
+	
+	$sql  =" select m.*, o.id_siscofis_material_origem, o.id_siscofis_material_origem as cod_origem, o.codigo as origem from siscofis_secao_estoque es ";
+	$sql .=" left join siscofis_material_origem o on o.id_siscofis_material_origem = es.id_siscofis_material_origem";
+	$sql .=" left join siscofis_material m on o.id_siscofis_material = m.id_siscofis_material";
+	$sql .=" where ";
+	$sql .=" m.descricao like '%$palavra%'  ";
+	$sql .=" OR m.codigo = '$palavra'  ";
+	$sql .=" OR o.codigo = '$palavra'  ";
+	
+	$result	= DBExecute($sql);
+	if(!mysqli_num_rows($result)){
+
+	}else{
+		while($retorno = mysqli_fetch_assoc($result)){
+			$dados[] = $retorno;
+		}
+	}
+	
+	echo "<table class='highlight'>";
+	echo "	<tr>
+				<th>Cod Material</th>
+				<th>Cod Origem</th>
+				<th>Descrição</th>
+				<th>Selecionar</th>
+			</tr>";
+	foreach($dados as $linha){
+		echo "<tr class=''>
+				<td>$linha[codigo]</td>
+				<td>$linha[origem]</td>
+				<td>$linha[descricao]</td> 
+				<td><a 
+					idmaterial='$linha[id_siscofis_material]' 
+					nomemat='$linha[descricao]' 
+					codigo='$linha[codigo]' 
+					origem='$linha[cod_origem]'
+					origem_cod='$linha[origem]'
+					class='btn-floating setmaterial modal-close'><i class='material-icons'>check</i></a>
+				</td>
+			</tr>\n";
+	}
+	echo "</table>";
+	
+}
+
 if($_POST['metodo'] == "pesquisa_pnr"){
 	$palavra = $_POST['palavra'];
 	$secao = $_POST['criterio'];
